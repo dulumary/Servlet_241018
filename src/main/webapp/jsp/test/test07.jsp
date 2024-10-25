@@ -31,7 +31,6 @@
 		    map = new HashMap<String, Object>() {{ put("name", "반올림피자"); put("menu", "피자"); put("point", 4.3); } };
 		    list.add(map);
 		%>
-		
 		<h3 class="text-center">검색 결과</h3>
 		
 		<table class="table text-center">
@@ -45,13 +44,19 @@
 			<tbody>
 			<% for(Map<String, Object> info:list) { 
 					if(menu.equals(info.get("menu"))) {
+						// pointFilter 가 null 이면 
+						// pointFilter 가 null이 아니면, point가 4 초과인 결과만
+						double point = (Double)info.get("point");
+						if(pointFilter == null || point > 4.0) {
 			%>
+				
 				<tr>
 					<td><%= info.get("menu") %></td>
 					<td><%= info.get("name") %></td>
 					<td><%= info.get("point") %></td>
 				</tr>
-			<% 	} 
+			<%	 	}
+				} 
 			} %>	
 	
 			</tbody>		
